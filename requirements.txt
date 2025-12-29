@@ -1,0 +1,4 @@
+-r Common/requirements.txt
+-r Core/requirements.txt
+-r Server/requirements.txt
+-r Frontend/requirements.txt
