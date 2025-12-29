@@ -1,4 +1,4 @@
-# Law-And-Judgement-Model-
+# Law-And-Judgement-Model
 
 An advanced machine learning system for **legal document analysis**, **case similarity search**, and **judgment outcome prediction**, powered by the **InLegalBERT** model and **FAISS-based semantic retrieval**.  
 
@@ -41,7 +41,8 @@ Law-And-Judgement-Model enables:
 
 ## **Project Structure**
 
-```
+``` text
+Law-And-Judgement-Model
 ├── Common/
 │   ├── device_utils.py # GPU/CPU detection utilities
 │   ├── logger_utils.py # Logging utilities
@@ -86,7 +87,7 @@ Law-And-Judgement-Model enables:
 ## **Project Structure**
 
 ```mermaid
-    graph TD
+   graph TD
     %% Input Stage
     Start[User Input: PDF or Text] --> Auth{API Key Guard}
     Auth -- Unauthorized --> Err[401 Error]
