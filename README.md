@@ -83,6 +83,44 @@ Law-And-Judgement-Model enables:
 
 ---
 
+## **Project Structure**
+
+```mermaid
+    graph TD
+    %% Input Stage
+    Start[User Input: PDF or Text] --> Auth{API Key Guard}
+    Auth -- Unauthorized --> Err[401 Error]
+    Auth -- Authorized --> Route{Route Selector}
+
+    %% Backend Orchestration
+    Route -- "/analyze" --> Inference[Inference Engine]
+    Route -- "/train" --> Pipeline[Data Pipeline]
+
+    %% Pipeline Logic (Training)
+    Pipeline --> Pre[PDF Preprocessing]
+    Pre --> Norm[JSON Normalization]
+    Norm --> Embed[InLegalBERT Embedding]
+    Embed --> FAISS_Build[FAISS Index Creation]
+    FAISS_Build --> Save[Save .faiss & .pkl]
+
+    %% Inference Logic (Analysis)
+    Inference --> Artifacts{Check Artifacts}
+    Artifacts -- Missing --> Pipeline
+    Artifacts -- Exists --> Load[Load Index & Metadata]
+    
+    Load --> QueryVec[Generate Query Embedding]
+    QueryVec --> Search[FAISS L2/IP Search]
+    
+    %% Prediction & Retrieval
+    Search --> TopK[Retrieve Top-K Matches]
+    TopK --> Outcome[Heuristic Outcome Prediction]
+    Outcome --> Metadata[Link IDs to Case Details]
+    
+    %% Result
+    Metadata --> Result[Final JSON Response]
+    Result --> UI[Streamlit Dashboard Rendering]
+```
+
 ## **Dataset Requirements**
 
 ### **Data Source**
